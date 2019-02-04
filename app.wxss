@@ -1,0 +1,17 @@
+/**app.wxss**/
+@import "./static/stylesheet.wxss";
+page{
+  height: 100%;
+  width: 100%;
+  /* background-color: #fff; */
+  color: #666;
+}
+image{
+  display: block;
+}
+.loading-container {
+  position: absolute;
+  width: 100%;
+  top: 25%;
+  /* transform: translateY(-50%); */
+}
