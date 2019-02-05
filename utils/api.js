@@ -13,7 +13,6 @@ const getSongMusicData = function (id) {
     success: function (res) {
       if (res.data && res.data.code === 200) {
         app.globalData.songMusicData = res.data.data;
-        console.log(app.globalData.songMusicData);
       }
     },
     fail: function (res) {

@@ -20,13 +20,12 @@ Page({
   // 添加
   onLoad: function () {
     /* 获取歌单分类 */
-    // api.getHotMusicData('全部', 100, 'hot');
-
     api.getEssenceMusicData('全部', 100);
     api.getHotMusicData('全部', 100, 'new');
-    // api.getHotMusicData('全部', 100, 'hot');
+    // api.getSongSlider();
   },
   onShow: function () {
+    app.globalData.songMusicData.mark = false;
     let essenceTime = setInterval(() => {
       if (app.globalData.essenceMusicData) {
         this.updateData('essence');
@@ -34,10 +33,10 @@ Page({
       }
     }, 10);
 
-    // let hotTime = setInterval(() => {
-    //   if (app.globalData.hotMusicData) {
-    //     this.updateData('hot');
-    //     clearInterval(hotTime);
+    // let slider = setInterval(() => {
+    //   if (app.globalData.songSliderData) {
+    //     this.updateData('slider');
+    //     clearInterval(slider);
     //   }
     // }, 10);
 
@@ -65,6 +64,10 @@ Page({
           newList: app.globalData.newMusicData.slice(0, 12)
         });
         break;
+      // case 'slider':
+      //   let slider = app.globalData.songSliderData.slider
+      //   this.setData({ slider });
+      //   break;
       default:
         break;
     }
@@ -80,17 +83,17 @@ Page({
     })
   },
   _selectSongSheet: function (event) {
-    let mark = event.currentTarget.dataset.mark,url='';
+    let mark = event.currentTarget.dataset.mark, url = '';
     if (mark === 'new') {
-      url= '/pages/newSongSheet/newSongSheet';
+      url = '/pages/newSongSheet/newSongSheet';
     } else if (mark === 'hot') {
-      url= '/pages/hotSongSheet/hotSongSheet';
+      url = '/pages/hotSongSheet/hotSongSheet';
     } else if (mark === 'culle') {
-      url= '/pages/culleSongSheet/culleSongSheet';
+      url = '/pages/culleSongSheet/culleSongSheet';
     } else if (mark === 'all') {
-      url= '/pages/allSongSheet/allSongSheet';
+      url = '/pages/allSongSheet/allSongSheet';
     };
-    wx.navigateTo({url});
+    wx.navigateTo({ url });
   }
 })
 // //index.js

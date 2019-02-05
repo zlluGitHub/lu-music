@@ -31,6 +31,9 @@ Page({
     this._init();
   },
   _init: function () {
+    if (app.currentIndex === 1) {
+      app.songData = app.songMusicData.songs[1];
+    }
     this._getLyric(app.songData.lrc);
     this._createAudio(app.songData.url);
     this.setData({
@@ -113,7 +116,7 @@ Page({
     const backgroundAudioManager = wx.getBackgroundAudioManager();
     app.backgroundAudioManager = backgroundAudioManager;
     backgroundAudioManager.title = app.songData.name;
-    backgroundAudioManager.epname = app.songSheetData.title;
+    backgroundAudioManager.epname = app.songSheetData ? app.songSheetData.title : '';
     backgroundAudioManager.singer = app.songData.singer;
     backgroundAudioManager.coverImgUrl = app.songData.pic;
     backgroundAudioManager.src = dataUrl;
@@ -123,7 +126,7 @@ Page({
         playIcon: 'icon-pause',
         cdCls: 'play'
       })
-    
+
     })
     // 监听音乐暂停。
     backgroundAudioManager.onPause(() => {
@@ -145,15 +148,27 @@ Page({
       this.setData({
         currentTime: this._formatTime(currentTime),
         percent: currentTime / duration
-      })
+      });
       if (currentTime === duration) {
-        this.next();
-      }
+        if (this.data.playMod === 1) {
+          this.next();
+        } else if (this.data.playMod === 2) {
+          const math = app.songMusicData.songs.length;
+          app.currentIndex === Math.floor(Math.random() * (math + 1));
+          app.songData = app.songMusicData.songs[app.currentIndex];
+          this.setData({
+            currentIndex: app.currentIndex
+          });
+          this._init();
+        } else if (this.data.playMod === 3) {
+          this._init();
+        };
+      };
       this.handleLyric(currentTime * 1);
       this.setData({
-         //总时长
-         duration: this._formatTime(backgroundAudioManager.duration)
-      })
+        //总时长
+        duration: this._formatTime(backgroundAudioManager.duration)
+      });
     });
   },
 
@@ -190,9 +205,7 @@ Page({
     if (playMod > SINGLE_CYCLE_MOD) {
       playMod = SEQUENCE_MODE
     }
-    this.setData({
-      playMod: playMod
-    })
+    this.setData({ playMod });
   },
   prev: function () {
     app.backgroundAudioManager.stop();
@@ -227,27 +240,6 @@ Page({
     }
 
   },
-  /**
-   * 获取不同播放模式下的下一曲索引
-   * @param nextFlag: next or prev
-   * @returns currentIndex
-   */
-  // getNextIndex: function (nextFlag) {
-  //   let ret,
-  //     currentIndex = app.currentIndex,
-  //     mod = this.data.playMod,
-  //     len = this.data.songslist.length
-  //   if (mod === RANDOM_MOD) {
-  //     ret = util.randomNum(len)
-  //   } else {
-  //     if (nextFlag) {
-  //       ret = currentIndex + 1 == len ? 0 : currentIndex + 1
-  //     } else {
-  //       ret = currentIndex - 1 < 0 ? len - 1 : currentIndex - 1
-  //     }
-  //   }
-  //   return ret
-  // },
 
   openList: function () {
     if (!this.data.songslist.length) {

@@ -43,9 +43,10 @@ App({
     newMusicData: null,
     detailsMusicData: null,
     searchMusicData: null,
-    songMusicData: null,
+    songMusicData: {mark:false},
     songSheetData: null,
     songData:null,
-    currentIndex:null
+    currentIndex:null,
+    singerArr:null
   }
 })

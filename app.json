@@ -1,14 +1,16 @@
 {
   "pages":[
-    "pages/search/search",
     "pages/index/index",
+    "pages/search/search",
     "pages/player/player",
     "pages/bill-list/bill-list",
     "pages/allSongSheet/allSongSheet",
     "pages/hotSongSheet/hotSongSheet",
     "pages/newSongSheet/newSongSheet",
     "pages/culleSongSheet/culleSongSheet",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/about/about",
+    "pages/singer/singer"
   ],
   "requiredBackgroundModes": ["audio"],
   "window":{
@@ -18,8 +20,8 @@
     "navigationBarTextStyle":"black"
   },
   "tabBar": {
-    "color": "#919191",
-    "selectedColor": "#ffcd32",
+    "color": "#8a8a8a",
+    "selectedColor": "#1296db",
     "backgroundColor": "#fff",
     "position": "bottom",
     "list": [
@@ -38,14 +40,14 @@
       {
         "pagePath": "pages/search/search",
         "text": "歌曲搜索",
-        "iconPath": "static/image/rank-1.png",
-        "selectedIconPath": "static/image/rank-2.png"
+        "iconPath": "static/image/search-1.png",
+        "selectedIconPath": "static/image/search-2.png"
       },
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/about/about",
         "text": "个人中心",
-        "iconPath": "static/image/my.png",
-        "selectedIconPath": "static/image/my-1.png"
+        "iconPath": "static/image/about-1.png",
+        "selectedIconPath": "static/image/about-2.png"
       }
     ]
   }

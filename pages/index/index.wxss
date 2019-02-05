@@ -47,32 +47,7 @@ swiper {
 .list-warp{
   padding: 0px 5px;
 }
-.list-warp .list-title {
-  font-size: 30rpx;
-  padding:0rpx 10rpx;
-  border-left: 4rpx solid red;
-  margin: 20rpx 0rpx; 
-  margin-top:25px; 
-  margin-left: 10rpx;
-  overflow: hidden;
-}
-.list-warp .list-more{
-  margin: auto;
-  width: 146rpx;
-  border: 1rpx solid #eee;
-  padding:18rpx 40rpx;
-  text-align: center;
-  font-size: 32rpx;
-  margin-bottom: 100rpx;
-  margin-top: 10rpx;
-  border-radius: 28rpx;
-}
-.list-warp .list-title .type-title{
-float: left;
-}
-.list-warp .list-title .more{
-float: right;
-}
+
 .list-warp .toplist{
   margin-top: 3px;
   font-size: 24rpx;

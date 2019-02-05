@@ -9,13 +9,13 @@
 }
 .bill-box .bill-top .random{
    width: 250rpx;
-   color: #666;
+   color: #fff;
    border-radius: 24rpx;
    padding:20rpx; 
    text-align: center;
    position: absolute;
    bottom: 40rpx;
-   background-color: #fff;
+   background-color: rgba(0, 0, 0, 0.5);
     left: 30%;
 }
 .bill-box .bill-list{

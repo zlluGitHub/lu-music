@@ -15,3 +15,29 @@ image{
   top: 25%;
   /* transform: translateY(-50%); */
 }
+.list-title {
+  font-size: 30rpx;
+  padding:0rpx 10rpx;
+  border-left: 4rpx solid red;
+  margin: 20rpx 0rpx; 
+  margin-top:25px; 
+  margin-left: 10rpx;
+  overflow: hidden;
+}
+.list-more{
+  margin: auto;
+  width: 146rpx;
+  border: 1rpx solid #eee;
+  padding:18rpx 40rpx;
+  text-align: center;
+  font-size: 32rpx;
+  margin-bottom: 100rpx;
+  margin-top: 10rpx;
+  border-radius: 28rpx;
+}
+.list-title .type-title{
+float: left;
+}
+.list-title .more{
+float: right;
+}

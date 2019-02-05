@@ -2,46 +2,111 @@ const api = require('../../utils/api.js');
 const app = getApp().globalData;
 Page({
   data: {
-    hotSearch: [],
+    hotList: [],
+    singerList: [],
     result: false
   },
   onLoad: function () {
-    this._getHotSearch()
-    this.dealHistroySearch()
+    this._getHotSearch();
+    this._getSingerSearch();
+    // this.dealHistroySearch()
   },
 
   searchAction: function (event) {
-    let keyWrod = event.detail.value || event.currentTarget.dataset.txt
-    const url = `https://api.bzqll.com/music/netease/search?key=579621905&s=${keyWrod}&type=song&limit=200&offset=0`;
+    let keyWrod = event.detail.value || event.currentTarget.dataset.txt || event
+    if (keyWrod) {
+      let url = `https://api.bzqll.com/music/netease/search?key=579621905&s=${keyWrod}&type=song&offset=0`;
+      wx.request({
+        url,
+        method: 'GET',
+        success: function (res) {
+          if (res.data.result !== 'ERROR') {
+            app.songMusicData = { songs: res.data.data, mark: true };
+            wx.navigateTo({
+              url: '/pages/bill-list/bill-list'
+            });
+          } else {
+            wx.showModal({
+              title: '温馨提示',
+              content: '此内容暂不存在！',
+              success: function (res) {
+                if(res.confirm) {
+                  console.log('用户点击确定')
+                }
+              }
+            })
+          }
+        },
+        fail: function (res) {
+          console.log(res.data);
+        }
+      });
+    }
+
+  },
+  _getHotSearch: function () {
+    const _this = this;
     wx.request({
-      url,
+      url: 'https://c.y.qq.com/splcloud/fcgi-bin/gethotkey.fcg?g_tk=5381&jsonpCallback=hotSearchKeysmod_top_search&loginUin=0&hostUin=0&format=jsonp&inCharset=utf8&outCharset=utf-8&notice=0&platform=yqq&needNewCode=0',
       method: 'GET',
       success: function (res) {
         if (res.data) {
-          console.log(res.data);
+          let res1 = res.data.replace('hotSearchKeysmod_top_search(', '')
+          let res2 = JSON.parse(res1.substring(0, res1.length - 1))
+          const hotArr = res2.data.hotkey;
+          _this.setData({
+            hotList: hotArr.length > 10 ? hotArr.slice(0, 10) : hotArr
+          })
         }
       },
       fail: function (res) {
         console.log(res);
       }
     });
-
   },
 
-  _getHotSearch: function () {
-    api.getHotSearch().then((res) => {
-      let res1 = res.data.replace('hotSearchKeysmod_top_search(', '')
-      let res2 = JSON.parse(res1.substring(0, res1.length - 1))
-      if (res2.code === 0) {
-        let hotArr = res2.data.hotkey
-        this.setData({
-          hotSearch: hotArr.length > 10 ? hotArr.slice(0, 10) : hotArr
-        })
+
+  _getSingerSearch: function () {
+    const _this = this;
+    wx.request({
+      url: 'https://c.y.qq.com/v8/fcg-bin/v8.fcg?g_tk=5381&inCharset=utf-8&outCharset=utf-8&notice=0&format=jsonp&channel=singer&page=list&key=all_all_all&pagesize=100&pagenum=1&hostUin=0&needNewCode=0&platform=yqq&jsonpCallback=callback',
+      method: 'GET',
+      success: function (res) {
+        if (res.data) {
+          let res1 = res.data.replace('callback(', '')
+          let res2 = JSON.parse(res1.substring(0, res1.length - 1))
+          const singerArr = res2.data.list;
+          app.singerArr = singerArr;
+          _this.setData({
+            singerList: singerArr.length > 10 ? singerArr.slice(0, 10) : singerArr
+          })
+        }
+      },
+      fail: function (res) {
+        console.log(res);
       }
-    }).catch((err) => {
-      console.log(err)
-    })
+    });
   },
+
+  selectSinger: function () {
+    wx.navigateTo({ url: '/pages/singer/singer' });
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   dealData: function (data) {
     if (data) {
