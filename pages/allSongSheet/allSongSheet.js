@@ -9,7 +9,7 @@ Page({
   },
   // 添加
   onLoad: function () {
-    const qualityList= [...app.essenceMusicData,...app.hotMusicData,...app.newMusicData];
+    const qualityList= [...app.essenceMusicData,...app.newMusicData];
     this.setData({qualityList});
   },
   //选择歌单ID

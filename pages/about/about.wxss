@@ -6,14 +6,10 @@
     height: 400rpx;
 }
 .userinfo-wrapper {
-    position: absolute;
-    margin: auto;
-    width: 128rpx;
-    height: 128rpx;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+  display: flex;
+  align-items: center;
+  border-bottom: 1rpx solid #999;
+  padding-bottom: 20rpx;
 }
 .userinfo {
     display: flex;
@@ -24,13 +20,17 @@
 .userinfo-avatar {
     width: 128rpx;
     height: 128rpx;
+    overflow: hidden;
     border-radius: 50%;
+    margin-left: 50rpx;
+   border: 8rpx solid rgba(0, 0, 0, 0.1);
 }
 
 .userinfo-nickname {
     text-align: center;
     color: #aaa;
-    font-size: 12px;
+    font-size: 32rpx;
+    margin-left: 24rpx;
 }
 .content {
     height: 100%;
@@ -38,12 +38,11 @@
 }
 .content .tab .item{
     display: flex;
-    font-size: 14px;
     color: #aaa;
     padding: 20rpx 50rpx;
     height: 50rpx;
     line-height: 50rpx;
-    border-bottom: 1rpx solid #333;
+    font-size: 30rpx;
 }
 .tab .item .icon ,.tab .item .more {
     flex: 0 0 60rpx;
@@ -54,7 +53,11 @@
 .tab .item .text {
     flex: 0 0 540rpx;
 }
-.tab .item .icon image,.tab .item .more image ,.tab .item .more .switch{
-    width: 38rpx;
-    height: 38rpx;
+.tab .item .more image {
+    width: 30rpx;
+    height: 30rpx;
+}
+.tab .item .icon image,.tab .item .more .switch{
+    width: 40rpx;
+    height: 40rpx;
 }

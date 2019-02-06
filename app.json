@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/about/about",
     "pages/search/search",
     "pages/player/player",
     "pages/bill-list/bill-list",
@@ -9,7 +10,6 @@
     "pages/newSongSheet/newSongSheet",
     "pages/culleSongSheet/culleSongSheet",
     "pages/logs/logs",
-    "pages/about/about",
     "pages/singer/singer"
   ],
   "requiredBackgroundModes": ["audio"],
